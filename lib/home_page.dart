@@ -14,28 +14,14 @@ class _HomePageState extends State<HomePage> {
 
   List<TransactionModel> _transactionList = [
     TransactionModel(
-      logo: 'assets/images/mcdonalds.png',
-      name: "McDonald\'s",
+      name: "S20",
       date: '22.02.2020',
-      amount: '-22,50',
+      amount: '4500',
     ),
     TransactionModel(
-      logo: 'assets/images/gas-station.png',
-      name: "Petrol",
+      name: "s20 fe",
       date: '22.02.2020',
-      amount: '-75,45',
-    ),
-    TransactionModel(
-      logo: 'assets/images/mcdonalds.png',
-      name: "McDonald\'s",
-      date: '22.02.2020',
-      amount: '-22,50',
-    ),
-    TransactionModel(
-      logo: 'assets/images/gas-station.png',
-      name: "Petrol",
-      date: '22.02.2020',
-      amount: '-75,45',
+      amount: '2500',
     ),
   ];
 
@@ -137,7 +123,7 @@ class _HomePageState extends State<HomePage> {
             height: 8,
           ),
           Text(
-            'Total Balance',
+            'Faturamento total',
             style: TextStyle(
               color: Colors.white.withOpacity(0.8),
               fontSize: 20,
@@ -151,13 +137,13 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              /// Income
+              /// Eletronicos
               GestureDetector(
                 onTap: () => setState(() {
                   _isIncome = !_isIncome;
                 }),
                 child: Text(
-                  'Income',
+                  'Eletrônicos',
                   style: TextStyle(
                     color: _isIncome ? _secondaryColor : Colors.white,
                     fontSize: 20,
@@ -167,13 +153,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              /// Outcome
+              /// Acessórios
               GestureDetector(
                 onTap: () => setState(() {
                   _isIncome = !_isIncome;
                 }),
                 child: Text(
-                  'Outcome',
+                  'Acessórios',
                   style: TextStyle(
                     color: _isIncome ? Colors.white : _secondaryColor,
                     fontSize: 20,
@@ -202,9 +188,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             _reportCell(
               isSavings: true,
-              title: 'Savings Account',
+              title: 'Percentual Atingido',
               deposit: '\$5,450',
-              rate: '+3,50%',
+              rate: '\$3,50',
               progress: 25,
             ),
             SizedBox(
@@ -212,9 +198,9 @@ class _HomePageState extends State<HomePage> {
             ),
             _reportCell(
               isSavings: false,
-              title: 'Financial Cushion',
+              title: 'Para 100% da meta',
               deposit: '\$12,350',
-              rate: '+3,50%',
+              rate: 'R\$350,00',
               progress: 50,
             ),
             SizedBox(
@@ -228,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Transactions',
+                        'Vendas',
                         style: TextStyle(
                           color: _primaryColor,
                           fontSize: 18,
@@ -246,57 +232,34 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Divider(),
-                ListView.separated(
-                  primary: false,
-                  shrinkWrap: true,
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: _transactionList.length,
-                  itemBuilder: (context, index) => ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Container(
-                      width: 60,
-                      height: 60,
-                      clipBehavior: Clip.hardEdge,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border:
-                            Border.all(color: _primaryColor.withOpacity(0.1)),
+                Column(
+                  children: _transactionList.map((tr) {
+                    return Card(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2,
+                              ),
+                            ),
+                        padding:EdgeInsets.all(10),
+                            child: Text(tr.amount.toString()),
+                          ),
+                          Column(children: <Widget>[
+                            Text(tr.name),
+                            Text(tr.date),
+                          ]),
+                        ],
                       ),
-                      child: Image.asset(
-                        _transactionList[index].logo,
-                        fit: BoxFit.cover,
-                        width: 30,
-                        height: 30,
-                      ),
-                    ),
-                    title: Text(
-                      _transactionList[index].name,
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      _transactionList[index].date,
-                      style: TextStyle(
-                        color: _primaryColor.withOpacity(0.6),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    trailing: Text(
-                      _transactionList[index].amount,
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                    );
+                  }).toList(),
+                )
               ],
             ),
           ],
@@ -385,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   _reportInnerCell(
                     isSavings: isSavings,
-                    title: 'Deposit',
+                    title: 'Eletronico',
                     value: deposit,
                   ),
                   SizedBox(
@@ -393,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _reportInnerCell(
                     isSavings: isSavings,
-                    title: 'Rate',
+                    title: 'Acessorio',
                     value: rate,
                   ),
                 ],
