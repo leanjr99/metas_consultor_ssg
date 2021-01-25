@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:metas_consultor_ssg/transaction_model.dart';
+import 'package:metas_consultor_ssg/components/vendas_form.dart';
+import 'components/transaction_list.dart';
+import 'components/transaction_user.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,18 +14,7 @@ class _HomePageState extends State<HomePage> {
   static const Color _primaryColor = Colors.deepPurpleAccent;
   static const Color _secondaryColor = Colors.deepOrangeAccent;
 
-  List<TransactionModel> _transactionList = [
-    TransactionModel(
-      name: "S20",
-      date: '22.02.2020',
-      amount: '4500',
-    ),
-    TransactionModel(
-      name: "s20 fe",
-      date: '22.02.2020',
-      amount: '2500',
-    ),
-  ];
+
 
   /// **********************************************
   /// LIFE CYCLE METHODS
@@ -180,6 +171,10 @@ class _HomePageState extends State<HomePage> {
 
   /// Main Body
   Expanded _mainBody() {
+    String title;
+    String value;
+
+
     return Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -232,34 +227,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Column(
-                  children: _transactionList.map((tr) {
-                    return Card(
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 2,
-                              ),
-                            ),
-                        padding:EdgeInsets.all(10),
-                            child: Text(tr.amount.toString()),
-                          ),
-                          Column(children: <Widget>[
-                            Text(tr.name),
-                            Text(tr.date),
-                          ]),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                )
+              TransactionUser(),
               ],
             ),
           ],

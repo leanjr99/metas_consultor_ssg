@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 class TransactionModel {
 
   final String name;
-  final String date;
-  final String amount;
+  final DateTime date;
+  final int amount;
 
   const TransactionModel({
 
